@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ED7977B91D1729BF006FDF22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7977B81D1729BF006FDF22 /* AppDelegate.swift */; };
+		ED7977BB1D1729BF006FDF22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7977BA1D1729BF006FDF22 /* ViewController.swift */; };
+		ED7977BE1D1729BF006FDF22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7977BC1D1729BF006FDF22 /* Main.storyboard */; };
+		ED7977C11D1729BF006FDF22 /* Nonzero_Day.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ED7977BF1D1729BF006FDF22 /* Nonzero_Day.xcdatamodeld */; };
+		ED7977C31D1729BF006FDF22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED7977C21D1729BF006FDF22 /* Assets.xcassets */; };
+		ED7977C61D1729BF006FDF22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7977C41D1729BF006FDF22 /* LaunchScreen.storyboard */; };
+		ED7977D11D1729C0006FDF22 /* Nonzero_DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7977D01D1729C0006FDF22 /* Nonzero_DayTests.swift */; };
+		ED7977DC1D1729C0006FDF22 /* Nonzero_DayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7977DB1D1729C0006FDF22 /* Nonzero_DayUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ED7977CD1D1729C0006FDF22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED7977AD1D1729BF006FDF22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED7977B41D1729BF006FDF22;
+			remoteInfo = "Nonzero Day";
+		};
+		ED7977D81D1729C0006FDF22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED7977AD1D1729BF006FDF22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED7977B41D1729BF006FDF22;
+			remoteInfo = "Nonzero Day";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ED7977B51D1729BF006FDF22 /* Nonzero Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nonzero Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7977B81D1729BF006FDF22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ED7977BA1D1729BF006FDF22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ED7977BD1D1729BF006FDF22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ED7977C01D1729BF006FDF22 /* Nonzero_Day.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nonzero_Day.xcdatamodel; sourceTree = "<group>"; };
+		ED7977C21D1729BF006FDF22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ED7977C51D1729BF006FDF22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ED7977C71D1729BF006FDF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED7977CC1D1729C0006FDF22 /* Nonzero DayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nonzero DayTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7977D01D1729C0006FDF22 /* Nonzero_DayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonzero_DayTests.swift; sourceTree = "<group>"; };
+		ED7977D21D1729C0006FDF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED7977D71D1729C0006FDF22 /* Nonzero DayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nonzero DayUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED7977DB1D1729C0006FDF22 /* Nonzero_DayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonzero_DayUITests.swift; sourceTree = "<group>"; };
+		ED7977DD1D1729C0006FDF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ED7977B21D1729BF006FDF22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7977C91D1729C0006FDF22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7977D41D1729C0006FDF22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ED7977AC1D1729BF006FDF22 = {
+			isa = PBXGroup;
+			children = (
+				ED7977B71D1729BF006FDF22 /* Nonzero Day */,
+				ED7977CF1D1729C0006FDF22 /* Nonzero DayTests */,
+				ED7977DA1D1729C0006FDF22 /* Nonzero DayUITests */,
+				ED7977B61D1729BF006FDF22 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ED7977B61D1729BF006FDF22 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED7977B51D1729BF006FDF22 /* Nonzero Day.app */,
+				ED7977CC1D1729C0006FDF22 /* Nonzero DayTests.xctest */,
+				ED7977D71D1729C0006FDF22 /* Nonzero DayUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ED7977B71D1729BF006FDF22 /* Nonzero Day */ = {
+			isa = PBXGroup;
+			children = (
+				ED7977B81D1729BF006FDF22 /* AppDelegate.swift */,
+				ED7977BA1D1729BF006FDF22 /* ViewController.swift */,
+				ED7977BC1D1729BF006FDF22 /* Main.storyboard */,
+				ED7977C21D1729BF006FDF22 /* Assets.xcassets */,
+				ED7977C41D1729BF006FDF22 /* LaunchScreen.storyboard */,
+				ED7977C71D1729BF006FDF22 /* Info.plist */,
+				ED7977BF1D1729BF006FDF22 /* Nonzero_Day.xcdatamodeld */,
+			);
+			path = "Nonzero Day";
+			sourceTree = "<group>";
+		};
+		ED7977CF1D1729C0006FDF22 /* Nonzero DayTests */ = {
+			isa = PBXGroup;
+			children = (
+				ED7977D01D1729C0006FDF22 /* Nonzero_DayTests.swift */,
+				ED7977D21D1729C0006FDF22 /* Info.plist */,
+			);
+			path = "Nonzero DayTests";
+			sourceTree = "<group>";
+		};
+		ED7977DA1D1729C0006FDF22 /* Nonzero DayUITests */ = {
+			isa = PBXGroup;
+			children = (
+				ED7977DB1D1729C0006FDF22 /* Nonzero_DayUITests.swift */,
+				ED7977DD1D1729C0006FDF22 /* Info.plist */,
+			);
+			path = "Nonzero DayUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ED7977B41D1729BF006FDF22 /* Nonzero Day */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED7977E01D1729C0006FDF22 /* Build configuration list for PBXNativeTarget "Nonzero Day" */;
+			buildPhases = (
+				ED7977B11D1729BF006FDF22 /* Sources */,
+				ED7977B21D1729BF006FDF22 /* Frameworks */,
+				ED7977B31D1729BF006FDF22 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Nonzero Day";
+			productName = "Nonzero Day";
+			productReference = ED7977B51D1729BF006FDF22 /* Nonzero Day.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ED7977CB1D1729C0006FDF22 /* Nonzero DayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED7977E31D1729C0006FDF22 /* Build configuration list for PBXNativeTarget "Nonzero DayTests" */;
+			buildPhases = (
+				ED7977C81D1729C0006FDF22 /* Sources */,
+				ED7977C91D1729C0006FDF22 /* Frameworks */,
+				ED7977CA1D1729C0006FDF22 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED7977CE1D1729C0006FDF22 /* PBXTargetDependency */,
+			);
+			name = "Nonzero DayTests";
+			productName = "Nonzero DayTests";
+			productReference = ED7977CC1D1729C0006FDF22 /* Nonzero DayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ED7977D61D1729C0006FDF22 /* Nonzero DayUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED7977E61D1729C0006FDF22 /* Build configuration list for PBXNativeTarget "Nonzero DayUITests" */;
+			buildPhases = (
+				ED7977D31D1729C0006FDF22 /* Sources */,
+				ED7977D41D1729C0006FDF22 /* Frameworks */,
+				ED7977D51D1729C0006FDF22 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED7977D91D1729C0006FDF22 /* PBXTargetDependency */,
+			);
+			name = "Nonzero DayUITests";
+			productName = "Nonzero DayUITests";
+			productReference = ED7977D71D1729C0006FDF22 /* Nonzero DayUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ED7977AD1D1729BF006FDF22 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Mark Schmidt";
+				TargetAttributes = {
+					ED7977B41D1729BF006FDF22 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					ED7977CB1D1729C0006FDF22 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = ED7977B41D1729BF006FDF22;
+					};
+					ED7977D61D1729C0006FDF22 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = ED7977B41D1729BF006FDF22;
+					};
+				};
+			};
+			buildConfigurationList = ED7977B01D1729BF006FDF22 /* Build configuration list for PBXProject "Nonzero Day" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ED7977AC1D1729BF006FDF22;
+			productRefGroup = ED7977B61D1729BF006FDF22 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED7977B41D1729BF006FDF22 /* Nonzero Day */,
+				ED7977CB1D1729C0006FDF22 /* Nonzero DayTests */,
+				ED7977D61D1729C0006FDF22 /* Nonzero DayUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ED7977B31D1729BF006FDF22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7977C61D1729BF006FDF22 /* LaunchScreen.storyboard in Resources */,
+				ED7977C31D1729BF006FDF22 /* Assets.xcassets in Resources */,
+				ED7977BE1D1729BF006FDF22 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7977CA1D1729C0006FDF22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7977D51D1729C0006FDF22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ED7977B11D1729BF006FDF22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7977C11D1729BF006FDF22 /* Nonzero_Day.xcdatamodeld in Sources */,
+				ED7977BB1D1729BF006FDF22 /* ViewController.swift in Sources */,
+				ED7977B91D1729BF006FDF22 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7977C81D1729C0006FDF22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7977D11D1729C0006FDF22 /* Nonzero_DayTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7977D31D1729C0006FDF22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED7977DC1D1729C0006FDF22 /* Nonzero_DayUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ED7977CE1D1729C0006FDF22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED7977B41D1729BF006FDF22 /* Nonzero Day */;
+			targetProxy = ED7977CD1D1729C0006FDF22 /* PBXContainerItemProxy */;
+		};
+		ED7977D91D1729C0006FDF22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED7977B41D1729BF006FDF22 /* Nonzero Day */;
+			targetProxy = ED7977D81D1729C0006FDF22 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ED7977BC1D1729BF006FDF22 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED7977BD1D1729BF006FDF22 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ED7977C41D1729BF006FDF22 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED7977C51D1729BF006FDF22 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ED7977DE1D1729C0006FDF22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ED7977DF1D1729C0006FDF22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ED7977E11D1729C0006FDF22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Nonzero Day/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Nonzero-Day";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ED7977E21D1729C0006FDF22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Nonzero Day/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Nonzero-Day";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		ED7977E41D1729C0006FDF22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Nonzero DayTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Nonzero-DayTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nonzero Day.app/Nonzero Day";
+			};
+			name = Debug;
+		};
+		ED7977E51D1729C0006FDF22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Nonzero DayTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Nonzero-DayTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nonzero Day.app/Nonzero Day";
+			};
+			name = Release;
+		};
+		ED7977E71D1729C0006FDF22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Nonzero DayUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Nonzero-DayUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Nonzero Day";
+			};
+			name = Debug;
+		};
+		ED7977E81D1729C0006FDF22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Nonzero DayUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Nonzero-DayUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Nonzero Day";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ED7977B01D1729BF006FDF22 /* Build configuration list for PBXProject "Nonzero Day" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7977DE1D1729C0006FDF22 /* Debug */,
+				ED7977DF1D1729C0006FDF22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED7977E01D1729C0006FDF22 /* Build configuration list for PBXNativeTarget "Nonzero Day" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7977E11D1729C0006FDF22 /* Debug */,
+				ED7977E21D1729C0006FDF22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ED7977E31D1729C0006FDF22 /* Build configuration list for PBXNativeTarget "Nonzero DayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7977E41D1729C0006FDF22 /* Debug */,
+				ED7977E51D1729C0006FDF22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ED7977E61D1729C0006FDF22 /* Build configuration list for PBXNativeTarget "Nonzero DayUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED7977E71D1729C0006FDF22 /* Debug */,
+				ED7977E81D1729C0006FDF22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		ED7977BF1D1729BF006FDF22 /* Nonzero_Day.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ED7977C01D1729BF006FDF22 /* Nonzero_Day.xcdatamodel */,
+			);
+			currentVersion = ED7977C01D1729BF006FDF22 /* Nonzero_Day.xcdatamodel */;
+			path = Nonzero_Day.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = ED7977AD1D1729BF006FDF22 /* Project object */;
+}
