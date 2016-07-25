@@ -21,6 +21,7 @@ class ObjectiveViewController: UIViewController, PageContentController {
 	@IBOutlet weak var settingsButton: UIButton!
 */
 	
+	// TEST
 	
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var totalLabel: UILabel!
