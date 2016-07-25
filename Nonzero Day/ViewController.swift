@@ -94,6 +94,10 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 		pageControl.backgroundColor = UIColor.clearColor()
 		view.bringSubviewToFront(pageControl)
 	}
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return UIStatusBarStyle.LightContent
+	}
 
 
 }

@@ -39,6 +39,7 @@ class AddObjectiveViewController: UIViewController, UIPickerViewDataSource, UIPi
 	@IBOutlet weak var confirmButton: UIButton!
 	@IBOutlet weak var colorPicker: UICollectionView!
 	
+	@IBOutlet weak var topLabel: UILabel!
 	@IBOutlet weak var typePicker: UIPickerView!
 	@IBOutlet weak var nounPicker: UIPickerView!
 	var pageIndex : Int {
@@ -52,6 +53,19 @@ class AddObjectiveViewController: UIViewController, UIPickerViewDataSource, UIPi
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		
+		
+		let index = arc4random_uniform(UInt32(colors.count))
+		view.backgroundColor = colors[Int(index)]
+		confirmButton.tintColor = getComplementColor(view.backgroundColor!)
+		selectedIndex = NSIndexPath(forRow: Int(index), inSection: 0)
+		
+		colorPicker.delegate = self
+		colorPicker.dataSource = self
+		colorPicker.backgroundColor = UIColor.clearColor()
+
+		
+		
 		typePicker.dataSource = self
 		typePicker.delegate = self
 		typePicker.tag = 0
@@ -61,9 +75,9 @@ class AddObjectiveViewController: UIViewController, UIPickerViewDataSource, UIPi
 		nounPicker.dataSource = self
 		nounPicker.tag = 1
 		
-		colorPicker.delegate = self
-		colorPicker.dataSource = self
-		colorPicker.backgroundColor = UIColor.clearColor()
+	
+	
+		
 
     }
 
@@ -86,15 +100,7 @@ class AddObjectiveViewController: UIViewController, UIPickerViewDataSource, UIPi
 		}
 	}
 	
-	/*func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		if pickerView.tag == 0 {
-			//type picker view
-			return types[row].title
-		} else {
-			let currentTypeIndex = typePicker.selectedRowInComponent(0)
-			return types[currentTypeIndex].units[row].pluralNoun
-		}
-	}*/
+
 	
 	func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
 		var string : String
@@ -118,44 +124,47 @@ class AddObjectiveViewController: UIViewController, UIPickerViewDataSource, UIPi
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 8
+		return colors.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ColorCell", forIndexPath: indexPath) as! ColorCell
-		cell.color = colors[indexPath.row % colors.count]
-		cell.drawCell(false)
+		cell.color = colors[indexPath.row]
+		if indexPath == selectedIndex {
+			cell.drawCell(true)
+		} else {
+			cell.drawCell(false)
+		}
 		return cell
 	}
 	
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		//deselect original cell
-		var oldColor = view.backgroundColor
-		if(selectedIndex != nil){
-			let oldCell = collectionView.cellForItemAtIndexPath(selectedIndex) as! ColorCell
-			oldCell.color = colors[selectedIndex.row % colors.count]
-			UIView.transitionWithView(oldCell, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
-				oldCell.drawCell(false)
-				}, completion: nil)
-			oldColor = oldCell.color
-		}
+		
+		let oldCell = collectionView.cellForItemAtIndexPath(selectedIndex) as! ColorCell
+		oldCell.color = colors[selectedIndex.row]
+		UIView.transitionWithView(oldCell, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
+			oldCell.drawCell(false)
+			}, completion: nil)
+		
 		
 		selectedIndex = indexPath
+
 		
 		let newCell = collectionView.cellForItemAtIndexPath(selectedIndex) as! ColorCell
-		newCell.color = colors[selectedIndex.row % colors.count]
+		newCell.color = colors[selectedIndex.row]
 		UIView.transitionWithView(newCell, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
 			newCell.drawCell(true)
 			}, completion: nil)
 		
 		
-		changeBackgroundColor(fromColor: oldColor!, toColor: newCell.color)
+		changeBackgroundColor(fromColor: oldCell.color, toColor: newCell.color)
+		confirmButton.tintColor = getComplementColor(newCell.color)
 		
 	}
 	
 	func changeBackgroundColor(fromColor start : UIColor, toColor end : UIColor) {
 		
-		print("startColor: " + String(start) + " endColor: " + String(end))
 		var sRed, sGreen, sBlue : CGFloat
 		sRed = 0.0
 		sGreen = 0.0
@@ -170,24 +179,32 @@ class AddObjectiveViewController: UIViewController, UIPickerViewDataSource, UIPi
 		
 		let steps = 50
 		let timeStep = 1.0/Double(steps)
-		let redSlope = (eRed - sRed)/CGFloat(steps)
-		let greenSlope = (eGreen - sGreen)/CGFloat(steps)
-		let blueSlope = (eBlue - sBlue)/CGFloat(steps)
+		
+		let pRedSlope = (eRed - sRed)/CGFloat(steps)
+		let pGreenSlope = (eGreen - sGreen)/CGFloat(steps)
+		let pBlueSlope = (eBlue - sBlue)/CGFloat(steps)
+		
+	
+		
 
-		UIView.animateKeyframesWithDuration(1.5, delay: 0.0, options: [.AllowUserInteraction], animations: {
-			for i in 0...50 {
+		UIView.animateKeyframesWithDuration(2.0, delay: 0.0, options: [.AllowUserInteraction], animations: {
+			for i in 0...steps {
 				let time = Double(i) * timeStep
-				let newColor = UIColor(red: sRed + redSlope * CGFloat(i),
-					green: sGreen + greenSlope * CGFloat(i),
-					blue: sBlue + blueSlope * CGFloat(i),
+				let newPrimaryColor = UIColor(
+					red: sRed + pRedSlope * CGFloat(i),
+					green: sGreen + pGreenSlope * CGFloat(i),
+					blue: sBlue + pBlueSlope * CGFloat(i),
 					alpha: 1)
+				
 				UIView.addKeyframeWithRelativeStartTime(time, relativeDuration: timeStep, animations: {
-					self.view.backgroundColor = newColor
-					print("added keyframe #" + String(i) + " with time " + String(time) + " with color " + String(newColor))
+					self.view.backgroundColor = newPrimaryColor
+					
 				})
 			}
 			}, completion: nil)
-		print("finished animating")
+		
+		
+
 	}
 	
 	

@@ -8,7 +8,6 @@
 
 import UIKit
 
-import Charts
 
 class ObjectiveViewController: UIViewController, PageContentController {
 /*
@@ -28,7 +27,8 @@ class ObjectiveViewController: UIViewController, PageContentController {
 	@IBOutlet weak var streakLabel: UILabel!
 	@IBOutlet weak var expirationLabel: UILabel!
 	@IBOutlet weak var secondLabel: UILabel!
-	
+	@IBOutlet weak var addDataButton: UIButton!
+	@IBOutlet weak var settingsButton: UIButton!
 	
 	var objective : Objective!
 	var pageIndex : Int = 0
@@ -39,8 +39,8 @@ class ObjectiveViewController: UIViewController, PageContentController {
 		updateLabels()
 		
 		view.backgroundColor = objective.color
-		//addDataButton.tintColor = objective.complementColor
-		//settingsButton.tintColor = objective.complementColor
+		addDataButton.tintColor = objective.complementColor
+		settingsButton.tintColor = objective.complementColor
 	}
 	
 	
@@ -71,7 +71,7 @@ class ObjectiveViewController: UIViewController, PageContentController {
 	
 	func updateLabels() {
 		titleLabel.text = objective.title
-		totalLabel.text = String(objective.total) + " " + objective.pluralNoun + " in total"
+		totalLabel.text = objective.total == 1 ? "1 " + objective.singularNoun + " in total" : String(objective.total) + " " + objective.pluralNoun + " in total"
 		
 		
 		//Streak String

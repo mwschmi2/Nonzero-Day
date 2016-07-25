@@ -10,21 +10,42 @@ import UIKit
 
 func getComplementColor(color : UIColor) -> UIColor{
 	let index = colors.indexOf(color)
-	return colors[(index! + 1) % colors.count]
+	return complementaryColors[index!]
 }
 
 var colors : [UIColor] {
 	return buildColorsArray()
 }
 
-func buildColorsArray() -> [UIColor]{
-	let hexes : [Int] = [0x00ffff, 0xff9966]
+var complementaryColors : [UIColor] {
+	return buildComplementaryColorsArray()
+}
+
+func buildComplementaryColorsArray() -> [UIColor] {
 	var temp : [UIColor] = []
-	for hex in hexes {
-		temp.append(UIColor(netHex: hex))
+	for colorPair in colorPairs {
+		temp.append(UIColor(netHex: colorPair.accent))
+	}
+	return temp
+
+}
+func buildColorsArray() -> [UIColor]{
+	
+	var temp : [UIColor] = []
+	for colorPair in colorPairs {
+		temp.append(UIColor(netHex: colorPair.primary))
 	}
 	return temp
 }
+
+let colorPairs : [(primary: Int, accent: Int)] = [
+	(primary: 0x53B3CB, accent: 0xE01A4F),
+	(primary: 0x9893DA, accent: 0x9AD5CA),
+	(primary: 0x037971, accent: 0x5B1865),
+	(primary: 0xFF5A5F, accent: 0x40476D),
+	(primary: 0x414288, accent: 0xA1E8AF),
+	(primary: 0xF4C3C2, accent: 0xE88EED)
+]
 
 
 class Type {
