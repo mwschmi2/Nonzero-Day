@@ -15,6 +15,15 @@
 		ED7977C61D1729BF006FDF22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7977C41D1729BF006FDF22 /* LaunchScreen.storyboard */; };
 		ED7977D11D1729C0006FDF22 /* Nonzero_DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7977D01D1729C0006FDF22 /* Nonzero_DayTests.swift */; };
 		ED7977DC1D1729C0006FDF22 /* Nonzero_DayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7977DB1D1729C0006FDF22 /* Nonzero_DayUITests.swift */; };
+		EDD682CE1D45A3840028F1A8 /* AddObjectiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682C51D45A3840028F1A8 /* AddObjectiveViewController.swift */; };
+		EDD682CF1D45A3840028F1A8 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682C61D45A3840028F1A8 /* ColorCell.swift */; };
+		EDD682D01D45A3840028F1A8 /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682C71D45A3840028F1A8 /* AddDataViewController.swift */; };
+		EDD682D11D45A3840028F1A8 /* MSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682C81D45A3840028F1A8 /* MSDate.swift */; };
+		EDD682D21D45A3840028F1A8 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682C91D45A3840028F1A8 /* SampleData.swift */; };
+		EDD682D31D45A3840028F1A8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682CA1D45A3840028F1A8 /* SettingsViewController.swift */; };
+		EDD682D51D45A3840028F1A8 /* ObjectiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682CC1D45A3840028F1A8 /* ObjectiveViewController.swift */; };
+		EDD682D61D45A3840028F1A8 /* Objective.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682CD1D45A3840028F1A8 /* Objective.swift */; };
+		EDD683161D45A8530028F1A8 /* PageContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD683151D45A8530028F1A8 /* PageContentController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +58,15 @@
 		ED7977D71D1729C0006FDF22 /* Nonzero DayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nonzero DayUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7977DB1D1729C0006FDF22 /* Nonzero_DayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonzero_DayUITests.swift; sourceTree = "<group>"; };
 		ED7977DD1D1729C0006FDF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDD682C51D45A3840028F1A8 /* AddObjectiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddObjectiveViewController.swift; sourceTree = "<group>"; };
+		EDD682C61D45A3840028F1A8 /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
+		EDD682C71D45A3840028F1A8 /* AddDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
+		EDD682C81D45A3840028F1A8 /* MSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSDate.swift; sourceTree = "<group>"; };
+		EDD682C91D45A3840028F1A8 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		EDD682CA1D45A3840028F1A8 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		EDD682CC1D45A3840028F1A8 /* ObjectiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectiveViewController.swift; sourceTree = "<group>"; };
+		EDD682CD1D45A3840028F1A8 /* Objective.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objective.swift; sourceTree = "<group>"; };
+		EDD683151D45A8530028F1A8 /* PageContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +117,17 @@
 		ED7977B71D1729BF006FDF22 /* Nonzero Day */ = {
 			isa = PBXGroup;
 			children = (
+				EDD682C51D45A3840028F1A8 /* AddObjectiveViewController.swift */,
+				EDD682C61D45A3840028F1A8 /* ColorCell.swift */,
+				EDD682C71D45A3840028F1A8 /* AddDataViewController.swift */,
+				EDD682C81D45A3840028F1A8 /* MSDate.swift */,
+				EDD682C91D45A3840028F1A8 /* SampleData.swift */,
+				EDD682CA1D45A3840028F1A8 /* SettingsViewController.swift */,
+				EDD682CC1D45A3840028F1A8 /* ObjectiveViewController.swift */,
+				EDD682CD1D45A3840028F1A8 /* Objective.swift */,
 				ED7977B81D1729BF006FDF22 /* AppDelegate.swift */,
 				ED7977BA1D1729BF006FDF22 /* ViewController.swift */,
+				EDD683151D45A8530028F1A8 /* PageContentController.swift */,
 				ED7977BC1D1729BF006FDF22 /* Main.storyboard */,
 				ED7977C21D1729BF006FDF22 /* Assets.xcassets */,
 				ED7977C41D1729BF006FDF22 /* LaunchScreen.storyboard */,
@@ -259,9 +286,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDD682D51D45A3840028F1A8 /* ObjectiveViewController.swift in Sources */,
+				EDD682CE1D45A3840028F1A8 /* AddObjectiveViewController.swift in Sources */,
 				ED7977C11D1729BF006FDF22 /* Nonzero_Day.xcdatamodeld in Sources */,
 				ED7977BB1D1729BF006FDF22 /* ViewController.swift in Sources */,
+				EDD682CF1D45A3840028F1A8 /* ColorCell.swift in Sources */,
+				EDD682D01D45A3840028F1A8 /* AddDataViewController.swift in Sources */,
+				EDD682D11D45A3840028F1A8 /* MSDate.swift in Sources */,
 				ED7977B91D1729BF006FDF22 /* AppDelegate.swift in Sources */,
+				EDD683161D45A8530028F1A8 /* PageContentController.swift in Sources */,
+				EDD682D61D45A3840028F1A8 /* Objective.swift in Sources */,
+				EDD682D21D45A3840028F1A8 /* SampleData.swift in Sources */,
+				EDD682D31D45A3840028F1A8 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +522,7 @@
 				ED7977E21D1729C0006FDF22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ED7977E31D1729C0006FDF22 /* Build configuration list for PBXNativeTarget "Nonzero DayTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +531,7 @@
 				ED7977E51D1729C0006FDF22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ED7977E61D1729C0006FDF22 /* Build configuration list for PBXNativeTarget "Nonzero DayUITests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +540,7 @@
 				ED7977E81D1729C0006FDF22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
