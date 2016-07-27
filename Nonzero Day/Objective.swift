@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 struct Data : CustomStringConvertible{
@@ -44,6 +45,10 @@ class Objective  {
 		complementColor = getComplementColor(c)
 		dataDictionary = [:]
 	}
+	
+	/*init(withNSManagedObject o : NSManagedObject) {
+		
+	}*/
     func addData(withMSDate date: MSDate, withScore score: NSInteger){
         if (dataDictionary[date] != nil) {
             //already something there

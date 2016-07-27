@@ -33,6 +33,8 @@ class ObjectiveViewController: UIViewController, PageContentController {
 	
 	var objective : Objective!
 	var pageIndex : Int = 0
+	var rootViewController : ViewController!
+	
     override func viewDidLoad() {
 		
         super.viewDidLoad()

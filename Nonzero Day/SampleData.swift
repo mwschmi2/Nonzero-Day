@@ -78,6 +78,8 @@ let writing = Type(withTitle: "Writing", withVerb: "write", withUnits: writingNo
 
 let types : [Type] = [reading, writing]
 
-var objectiveData = [
+/*var objectiveData = [
 	Objective(withType: reading, withUnits: reading.units[0], withColor: colors[0]),
-	Objective(withType: writing, withUnits: writing.units[0], withColor: colors[1])]
+	Objective(withType: writing, withUnits: writing.units[0], withColor: colors[1])]*/
+
+var objectiveData : [Objective] = []

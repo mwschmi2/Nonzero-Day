@@ -17,6 +17,8 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 	var pageViewController : UIPageViewController?
 	@IBOutlet weak var pageControl: UIPageControl!
 	
+	var appDelegate : AppDelegate!
+	var objectives : [Objective]!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +34,18 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 		view.addSubview(pageViewController!.view)
 		pageViewController?.didMoveToParentViewController(self)
 		refreshPageControl(0)
+		
+		// get objectives
+		refreshObjectives()
+		
     }
+	
+	func refreshObjectives() {
+		appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		let managedContext = appDelegate.managedObjectContext
+		
+		
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,6 +83,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 			let vc = storyboard?.instantiateViewControllerWithIdentifier("ObjectiveViewController") as! ObjectiveViewController
 			vc.pageIndex = index
 			vc.objective = objectiveData[index]
+			vc.rootViewController = self
 			
 			return vc
 			
