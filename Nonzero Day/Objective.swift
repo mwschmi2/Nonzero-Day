@@ -10,14 +10,22 @@ import UIKit
 import CoreData
 
 
-struct Data : CustomStringConvertible{
-    var streak : NSInteger
-    var score : NSInteger
+class Data : NSManagedObject{
+    @NSManaged var streak : NSInteger
+    @NSManaged var score : NSInteger
+	@NSManaged var trueDate : NSDate
+	var myDate : MSDate {
+		return MSDate(withDate : trueDate)
+	}
 	
-    var description: String {
-        return "Streak : " + String(streak) + " Score: " + String(score)
-    }
-    
+	class func createInManagedObjectContext(moc: NSManagedObjectContext, streak : NSInteger, score: NSInteger, trueDate : NSDate) -> Data {
+		let newData = NSEntityDescription.insertNewObjectForEntityForName("Data", inManagedObjectContext: moc) as! Data
+		newData.streak = streak
+		newData.score = score
+		newData.trueDate = trueDate
+		
+		return newData
+	}
 }
 
 
@@ -46,30 +54,31 @@ class Objective  {
 		dataDictionary = [:]
 	}
 	
-	/*init(withNSManagedObject o : NSManagedObject) {
-		
-	}*/
-    func addData(withMSDate date: MSDate, withScore score: NSInteger){
-        if (dataDictionary[date] != nil) {
+	func addData(withNSDate date: NSDate, withScore score: NSInteger, withContext context : NSManagedObjectContext){
+		let myDate = MSDate(withDate: date)
+        if (dataDictionary[myDate] != nil) {
             //already something there
-			dataDictionary[date]!.score += score
+			dataDictionary[myDate]!.score += score
 		} else {
 			var newData:Data
-			if let yesterdayData = dataDictionary[date.getYesterday()] {
+			if let yesterdayData = getYesterdayData() {
 				//if there is data from yesterday
-				newData = Data(streak: yesterdayData.streak + 1, score: score)
+				
+				//newData = Data(entity: yesterdayData.streak + 1, insertIntoManagedObjectContext: score)
+				
+				newData = Data.createInManagedObjectContext(context, streak: yesterdayData.streak + 1, score: score, trueDate: date)
 			} else {
-				newData = Data(streak: 1, score: score);
+				newData = Data.createInManagedObjectContext(context, streak: 1, score: score, trueDate: date)
 			}
-			dataDictionary[date] = newData
+			dataDictionary[myDate] = newData
 		}
 		
         total += score
     }
 	
     
-    func addTodayData(withScore score: NSInteger){
-        addData(withMSDate: MSDate(), withScore: score)
+	func addTodayData(withContext context : NSManagedObjectContext, withScore score: NSInteger){
+		addData(withNSDate: NSDate(), withScore: score, withContext: context)
     }
 	
 	func getYesterdayData() -> Data? {
