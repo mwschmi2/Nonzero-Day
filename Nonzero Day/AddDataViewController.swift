@@ -33,8 +33,8 @@ class AddDataViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 		scorePicker.showsSelectionIndicator = false
 		unitLabel.text = objective.singularNoun
 		view.backgroundColor = objective.color
-		confirmButton.tintColor = objective.complementColor
-		cancelButton.tintColor = objective.complementColor
+		confirmButton.tintColor = objective.accentColor
+		cancelButton.tintColor = objective.accentColor
 		
 		
 		questionLabel.text = "How much did you " + objective.verb + " today?"

@@ -10,18 +10,8 @@ import UIKit
 
 
 class ObjectiveViewController: UIViewController, PageContentController {
-/*
-	@IBOutlet weak var titleLabel: UILabel!
-	@IBOutlet weak var streakLabel: UILabel!
-	@IBOutlet weak var totalLabel: UILabel!
-	@IBOutlet weak var expirationLabel: UILabel!
-    @IBOutlet weak var secondLabel: UILabel!
-	@IBOutlet weak var addDataButton: UIButton!
+
 	
-	@IBOutlet weak var settingsButton: UIButton!
-*/
-	
-	// TEST
 	
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var totalLabel: UILabel!
@@ -34,6 +24,7 @@ class ObjectiveViewController: UIViewController, PageContentController {
 	var objective : Objective!
 	var pageIndex : Int = 0
 	var rootViewController : ViewController!
+	var backgroundColor : UIColor!
 	
     override func viewDidLoad() {
 		
@@ -42,8 +33,9 @@ class ObjectiveViewController: UIViewController, PageContentController {
 		updateLabels()
 		
 		view.backgroundColor = objective.color
-		addDataButton.tintColor = objective.complementColor
-		settingsButton.tintColor = objective.complementColor
+		backgroundColor = objective.color
+		addDataButton.tintColor = objective.accentColor
+		settingsButton.tintColor = objective.accentColor
 	}
 	
 	
@@ -67,7 +59,7 @@ class ObjectiveViewController: UIViewController, PageContentController {
 	
 	@IBAction func confirmDataEntry(segue:UIStoryboardSegue) {
 		let vc = segue.sourceViewController as? AddDataViewController
-		objective.addTodayData(withScore: (vc?.score)!)
+		objective.addTodayData(withContext: rootViewController.managedObjectContext, withScore: (vc?.score)!)
 		print("Confirmed, score is " + String((vc?.score)!))
 		updateLabels()
 	}

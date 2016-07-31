@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreData
 
 
 class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate{
@@ -17,11 +17,18 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 	var pageViewController : UIPageViewController?
 	@IBOutlet weak var pageControl: UIPageControl!
 	
-	var appDelegate : AppDelegate!
-	var objectives : [Objective]!
+	var managedObjectContext : NSManagedObjectContext!
+	var objectives : [Objective] = []
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		//get objectives
+		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		managedObjectContext = appDelegate.managedObjectContext
+		refreshObjectives()
+		
+		//set up page controller
 		pageViewController = storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as? UIPageViewController
 		pageViewController?.dataSource = self
 		pageViewController?.delegate = self
@@ -34,16 +41,24 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 		view.addSubview(pageViewController!.view)
 		pageViewController?.didMoveToParentViewController(self)
 		refreshPageControl(0)
+		view.backgroundColor = (startingViewController as! PageContentController).backgroundColor
 		
-		// get objectives
-		refreshObjectives()
 		
     }
 	
 	func refreshObjectives() {
-		appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		let managedContext = appDelegate.managedObjectContext
-		
+		let fetchRequest = NSFetchRequest(entityName: "Objective")
+
+		let sortDescriptor = NSSortDescriptor(key: "index", ascending: true)
+		fetchRequest.sortDescriptors = [sortDescriptor]
+		do {
+			objectives = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Objective]
+			/*for objective in objectives {
+				objective.refreshDictionary()
+			}*/
+		} catch {
+			print("cannot get objectives")
+		}
 		
 	}
 
@@ -65,7 +80,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 	
 	func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
 		let index = (viewController as! PageContentController).pageIndex
-		if index == objectiveData.count || index == NSNotFound {
+		if index == objectives.count || index == NSNotFound {
 			return nil
 		}
 		
@@ -73,16 +88,16 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 	}
 	
 	func viewControllerAtIndex(index : Int) -> UIViewController? {
-		if index < 0 || index > objectiveData.count {
+		if index < 0 || index > objectives.count {
 			return nil
-		} else if index == objectiveData.count {
+		} else if index == objectives.count {
 			let vc = storyboard?.instantiateViewControllerWithIdentifier("AddObjectiveViewController") as! AddObjectiveViewController
 			vc.rootViewController = self
 			return vc
 		} else {
 			let vc = storyboard?.instantiateViewControllerWithIdentifier("ObjectiveViewController") as! ObjectiveViewController
 			vc.pageIndex = index
-			vc.objective = objectiveData[index]
+			vc.objective = objectives[index]
 			vc.rootViewController = self
 			
 			return vc
@@ -91,7 +106,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 	}
 	
 	func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-		return objectiveData.count + 1
+		return objectives.count + 1
 	}
 	
 	
@@ -99,12 +114,14 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 	func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
 		let vc = pageViewController.viewControllers!.last as! PageContentController
 		self.refreshPageControl(vc.pageIndex)
+		view.backgroundColor = vc.backgroundColor
+		
 		
 	}
 	func refreshPageControl(index : Int) {
 		pageControl.currentPage = index
 		pageControl.userInteractionEnabled = false
-		pageControl.numberOfPages = objectiveData.count + 1
+		pageControl.numberOfPages = objectives.count + 1
 		pageControl.backgroundColor = UIColor.clearColor()
 		view.bringSubviewToFront(pageControl)
 	}

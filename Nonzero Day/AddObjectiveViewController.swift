@@ -26,12 +26,18 @@ class AddObjectiveViewController: UIViewController, UIPickerViewDataSource, UIPi
 
 	
 	@IBAction func confirmButton(sender: AnyObject) {
-		let objective = Objective(withType: types[typePicker.selectedRowInComponent(0)], withUnits: types[typePicker.selectedRowInComponent(0)].units[nounPicker.selectedRowInComponent(0)], withColor: colors[selectedIndex.row % colors.count])
-		objectiveData.append(objective)
-		let startingViewController = rootViewController.viewControllerAtIndex(objectiveData.count - 1)
+		
+		let type = types[typePicker.selectedRowInComponent(0)]
+		let units = types[typePicker.selectedRowInComponent(0)].units[nounPicker.selectedRowInComponent(0)]
+		let color = colors[selectedIndex.row]
+		
+		let objective = Objective.createInManagedObjectContext(rootViewController.managedObjectContext, withType: type, withUnits: units, withColor: color, withIndex: pageIndex)
+		
+		rootViewController.objectives.append(objective)
+		let startingViewController = rootViewController.viewControllerAtIndex(rootViewController.objectives.count - 1)
 		let viewControllers:[UIViewController] = [startingViewController!]
 		rootViewController.pageViewController?.setViewControllers(viewControllers, direction: UIPageViewControllerNavigationDirection.Reverse, animated: true, completion: nil)
-		rootViewController.refreshPageControl(objectiveData.count - 1)
+		rootViewController.refreshPageControl(rootViewController.objectives.count - 1)
 
 	}
 	
@@ -42,13 +48,16 @@ class AddObjectiveViewController: UIViewController, UIPickerViewDataSource, UIPi
 	@IBOutlet weak var topLabel: UILabel!
 	@IBOutlet weak var typePicker: UIPickerView!
 	@IBOutlet weak var nounPicker: UIPickerView!
+	
 	var pageIndex : Int {
-		return objectiveData.count
+		return rootViewController.objectives.count
 	}
 	
 	var rootViewController : ViewController!
+	var backgroundColor: UIColor!
 	
 	var selectedIndex : NSIndexPath!
+
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +66,7 @@ class AddObjectiveViewController: UIViewController, UIPickerViewDataSource, UIPi
 		
 		let index = arc4random_uniform(UInt32(colors.count))
 		view.backgroundColor = colors[Int(index)]
+		backgroundColor = view.backgroundColor
 		confirmButton.tintColor = getComplementColor(view.backgroundColor!)
 		selectedIndex = NSIndexPath(forRow: Int(index), inSection: 0)
 		

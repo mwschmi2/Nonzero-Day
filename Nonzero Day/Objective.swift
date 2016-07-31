@@ -11,69 +11,82 @@ import CoreData
 
 
 class Data : NSManagedObject{
-    @NSManaged var streak : NSInteger
-    @NSManaged var score : NSInteger
-	@NSManaged var trueDate : NSDate
+    @NSManaged var streak : NSNumber?
+    @NSManaged var score : NSNumber?
+	@NSManaged var trueDate : NSDate?
+	
+	@NSManaged var objective : Objective?
+	
 	var myDate : MSDate {
-		return MSDate(withDate : trueDate)
+		return MSDate(withDate : trueDate!)
 	}
 	
-	class func createInManagedObjectContext(moc: NSManagedObjectContext, streak : NSInteger, score: NSInteger, trueDate : NSDate) -> Data {
-		let newData = NSEntityDescription.insertNewObjectForEntityForName("Data", inManagedObjectContext: moc) as! Data
-		newData.streak = streak
-		newData.score = score
-		newData.trueDate = trueDate
-		
-		return newData
-	}
 }
 
 
 
-class Objective  {
+class Objective : NSManagedObject{
     
-    var title : String
-	var singularNoun : String
-	var pluralNoun : String
-	var verb : String
+    @NSManaged var title : String
+	@NSManaged var singularNoun : String
+	@NSManaged var pluralNoun : String
+	@NSManaged var verb : String
 	
-	var total = 0
-    var dataDictionary : [MSDate: Data]
+	@NSManaged var index : NSNumber
 	
-	var color : UIColor
-	var complementColor : UIColor
+	@NSManaged var total : NSNumber
 	
-	init(withType t: Type, withUnits u: Noun, withColor c : UIColor){
-		title = t.title
-		singularNoun = u.singularNoun
-		pluralNoun = u.pluralNoun
-		verb = t.verb
-		
-		color = c
-		complementColor = getComplementColor(c)
-		dataDictionary = [:]
+	@NSManaged var data : Set<Data>
+	
+	var dataDictionary : [MSDate : Data] = [:]
+	
+	func refreshDictionary() {
+		for (item) in data {
+			dataDictionary[item.myDate] = item
+		}
 	}
+	
+	@NSManaged var color : UIColor
+	@NSManaged var accentColor : UIColor
+	
+	
+	class func createInManagedObjectContext(moc: NSManagedObjectContext, withType t : Type, withUnits u: Noun, withColor c : UIColor, withIndex i : NSInteger) -> Objective{
+		let newObjective = NSEntityDescription.insertNewObjectForEntityForName("Objective", inManagedObjectContext: moc) as! Objective
+		newObjective.title = t.title
+		newObjective.singularNoun = u.singularNoun
+		newObjective.pluralNoun = u.pluralNoun
+		newObjective.verb = t.verb
+		
+		newObjective.color = c
+		newObjective.accentColor = getComplementColor(c)
+		newObjective.index = i
+		newObjective.total = 0
+		
+		newObjective.save()
+		
+		return newObjective
+	}
+
 	
 	func addData(withNSDate date: NSDate, withScore score: NSInteger, withContext context : NSManagedObjectContext){
 		let myDate = MSDate(withDate: date)
-        if (dataDictionary[myDate] != nil) {
+        if let todayData = dataDictionary[myDate] {
             //already something there
-			dataDictionary[myDate]!.score += score
+			todayData.score = todayData.score!.integerValue + score
 		} else {
-			var newData:Data
+			var newData : Data
 			if let yesterdayData = getYesterdayData() {
 				//if there is data from yesterday
-				
-				//newData = Data(entity: yesterdayData.streak + 1, insertIntoManagedObjectContext: score)
-				
-				newData = Data.createInManagedObjectContext(context, streak: yesterdayData.streak + 1, score: score, trueDate: date)
+				newData = createData(yesterdayData.streak!.integerValue + 1, score: score, trueDate: date)
 			} else {
-				newData = Data.createInManagedObjectContext(context, streak: 1, score: score, trueDate: date)
+				newData = createData(1, score: score, trueDate: date)
 			}
 			dataDictionary[myDate] = newData
+			data.insert(newData)
 		}
+        total = total.integerValue + score
 		
-        total += score
+		save()
     }
 	
     
@@ -119,6 +132,29 @@ class Objective  {
 		}
 	}
 	
+	override func awakeFromFetch() {
+		super.awakeFromFetch()
+		refreshDictionary()
+	}
+	
+	func createData(streak : NSNumber, score : NSNumber, trueDate : NSDate) -> Data {
+		let newData = NSEntityDescription.insertNewObjectForEntityForName("Data", inManagedObjectContext: managedObjectContext!) as! Data
+		newData.streak = streak
+		newData.score = score
+		newData.trueDate = trueDate
+		
+		newData.objective = self
+		
+		return newData
+	}
+	
+	func save() {
+		do {
+			try managedObjectContext!.save()
+		} catch {
+			print("Could not save, this shouldn't happen")
+		}
+	}
 
     
     

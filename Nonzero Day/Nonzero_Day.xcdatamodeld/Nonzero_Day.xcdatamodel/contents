@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Automatic">
     <entity name="Data" representedClassName=".Data" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="streak" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="trueDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="objective" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Objective" inverseName="data" inverseEntity="Objective" syncable="YES"/>
     </entity>
     <entity name="Objective" representedClassName=".Objective" syncable="YES">
+        <attribute name="accentColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="pluralNoun" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="singularNoun" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="total" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="verb" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="data" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Data" inverseName="objective" inverseEntity="Data" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Data" positionX="-54" positionY="18" width="128" height="90"/>
-        <element name="Objective" positionX="-198" positionY="-228" width="128" height="118"/>
+        <element name="Data" positionX="-54" positionY="18" width="128" height="103"/>
+        <element name="Objective" positionX="-198" positionY="-228" width="128" height="180"/>
     </elements>
 </model>
