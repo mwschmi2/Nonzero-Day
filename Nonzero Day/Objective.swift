@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreData
 
 class Data : NSManagedObject{
     @NSManaged var streak : NSNumber?
@@ -71,13 +71,16 @@ class Objective : NSManagedObject{
 		let myDate = MSDate(withDate: date)
         if let todayData = dataDictionary[myDate] {
             //already something there
+			//print("Data present")
 			todayData.score = todayData.score!.integerValue + score
 		} else {
 			var newData : Data
 			if let yesterdayData = getYesterdayData() {
+				//print("On a streak, adding new data")
 				//if there is data from yesterday
 				newData = createData(yesterdayData.streak!.integerValue + 1, score: score, trueDate: date)
 			} else {
+				//print("Not on a streak, adding new data")
 				newData = createData(1, score: score, trueDate: date)
 			}
 			dataDictionary[myDate] = newData
@@ -133,6 +136,7 @@ class Objective : NSManagedObject{
 	
 	override func awakeFromFetch() {
 		super.awakeFromFetch()
+		print("woke from fetch")
 		refreshDictionary()
 	}
 	
@@ -147,6 +151,31 @@ class Objective : NSManagedObject{
 		return newData
 	}
 	
+	func getDataForDays(numDays : Int) -> [Data?]{
+		var data : [Data?] = []
+		var currDate = MSDate()
+		for _ in 0..<numDays {
+			data.append(dataDictionary[currDate])
+			currDate = currDate.getYesterday()
+		}
+		
+		return data.reverse()
+	}
+	
+	func allDataNumDays() -> Int {
+		var earliest = NSDate()
+		for d in data {
+			earliest = (d.trueDate?.earlierDate(earliest))!
+		}
+		let timeInSeconds = earliest.timeIntervalSinceNow * -1
+		let timeInMinutes = timeInSeconds/60
+		let timeInHours = timeInMinutes/60
+		let timeInDays = timeInHours/24
+		print(timeInDays)
+		return max(Int(ceil(timeInDays) + 1), 3)
+		
+	}
+	
 	func save() {
 		do {
 			try managedObjectContext!.save()
@@ -154,6 +183,8 @@ class Objective : NSManagedObject{
 			print("Could not save, this shouldn't happen")
 		}
 	}
+	
+	
 
     
     

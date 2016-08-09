@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol PageContentController {
-	var pageIndex : Int { get }
-	var rootViewController : ViewController! { get }
-	var backgroundColor : UIColor! { get }
+class PageContentController : UIViewController {
+	var pageIndex : Int!
+	var rootViewController : ViewController!
+	var backgroundColor : UIColor!
 }

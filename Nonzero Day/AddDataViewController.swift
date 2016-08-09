@@ -22,7 +22,6 @@ class AddDataViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 	
 	var score = 1
 	var objective : Objective!
-	var selectedRow = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +60,6 @@ class AddDataViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 	}
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		selectedRow = row
 		if row == 0 {
 			UIView.transitionWithView(unitLabel, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
 				self.unitLabel.text = self.objective.singularNoun
@@ -80,14 +78,14 @@ class AddDataViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 					self.unitLabelSpacer.constant = 40
 				}
 				}, completion: nil)
-			
 		}
     }
 	
+	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if(segue.identifier == "confirmDataEntry"){
-			print(selectedRow)
-			score = selectedRow + 1
+			print("[AddDataViewController] Objective : " + objective.title)
+			objective.addTodayData(withContext: objective.managedObjectContext!, withScore: scorePicker.selectedRowInComponent(0) + 1)
 		}
 	}
 	

@@ -76,7 +76,11 @@ let reading = Type(withTitle: "Reading", withVerb: "read", withUnits: readingNou
 let writingNouns = [Noun(s: "sentence", p: "sentences"), Noun(s: "page", p: "pages"), Noun(s: "minute", p: "minutes")]
 let writing = Type(withTitle: "Writing", withVerb: "write", withUnits: writingNouns)
 
-let types : [Type] = [reading, writing]
+let programmingNouns = [Noun(s: "line of code", p: "lines of code"), Noun(s: "minute", p: "minutes")]
+let programming = Type(withTitle: "Programming", withVerb: "program", withUnits: programmingNouns)
+
+
+let types : [Type] = [reading, writing, programming]
 
 /*var objectiveData = [
 	Objective(withType: reading, withUnits: reading.units[0], withColor: colors[0]),

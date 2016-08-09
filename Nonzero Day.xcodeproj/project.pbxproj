@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED1F74D41D4FEB0B00D2284E /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1F74CD1D4FEADB00D2284E /* Charts.framework */; };
+		ED1F74D51D4FEB0B00D2284E /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED1F74CD1D4FEADB00D2284E /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED4B91871D4DC54B00546D27 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4B91861D4DC54B00546D27 /* ColorPicker.swift */; };
 		ED7977B91D1729BF006FDF22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7977B81D1729BF006FDF22 /* AppDelegate.swift */; };
 		ED7977BB1D1729BF006FDF22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7977BA1D1729BF006FDF22 /* ViewController.swift */; };
 		ED7977BE1D1729BF006FDF22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7977BC1D1729BF006FDF22 /* Main.storyboard */; };
@@ -15,6 +18,8 @@
 		ED7977C61D1729BF006FDF22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7977C41D1729BF006FDF22 /* LaunchScreen.storyboard */; };
 		ED7977D11D1729C0006FDF22 /* Nonzero_DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7977D01D1729C0006FDF22 /* Nonzero_DayTests.swift */; };
 		ED7977DC1D1729C0006FDF22 /* Nonzero_DayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7977DB1D1729C0006FDF22 /* Nonzero_DayUITests.swift */; };
+		ED7AAF0F1D56F978008F394B /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED7AAF0E1D56F978008F394B /* MarkerView.xib */; };
+		ED7AAF111D56FA27008F394B /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7AAF101D56FA27008F394B /* MarkerView.swift */; };
 		EDD682CE1D45A3840028F1A8 /* AddObjectiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682C51D45A3840028F1A8 /* AddObjectiveViewController.swift */; };
 		EDD682CF1D45A3840028F1A8 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682C61D45A3840028F1A8 /* ColorCell.swift */; };
 		EDD682D01D45A3840028F1A8 /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD682C71D45A3840028F1A8 /* AddDataViewController.swift */; };
@@ -27,6 +32,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		ED1F74CC1D4FEADB00D2284E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED1F74C51D4FEADB00D2284E /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
+			remoteInfo = "Charts-iOS";
+		};
+		ED1F74CE1D4FEADB00D2284E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED1F74C51D4FEADB00D2284E /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A52C5C371BAC5CA400594CDD;
+			remoteInfo = "Charts-TV";
+		};
+		ED1F74D01D4FEADB00D2284E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED1F74C51D4FEADB00D2284E /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65B3F5BF1C7370BE000983D0;
+			remoteInfo = "Charts-OSX";
+		};
+		ED1F74D21D4FEADB00D2284E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED1F74C51D4FEADB00D2284E /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06AEE7A21BDC3F8B009875AE;
+			remoteInfo = ChartsTests;
+		};
+		ED1F74D61D4FEB0B00D2284E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED1F74C51D4FEADB00D2284E /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = "Charts-iOS";
+		};
 		ED7977CD1D1729C0006FDF22 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ED7977AD1D1729BF006FDF22 /* Project object */;
@@ -43,7 +83,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		ED1F74D81D4FEB0B00D2284E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ED1F74D51D4FEB0B00D2284E /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		ED1F74C51D4FEADB00D2284E /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "Nonzero Day/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
+		ED4B91861D4DC54B00546D27 /* ColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		ED7977B51D1729BF006FDF22 /* Nonzero Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nonzero Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7977B81D1729BF006FDF22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED7977BA1D1729BF006FDF22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +114,8 @@
 		ED7977D71D1729C0006FDF22 /* Nonzero DayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nonzero DayUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7977DB1D1729C0006FDF22 /* Nonzero_DayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nonzero_DayUITests.swift; sourceTree = "<group>"; };
 		ED7977DD1D1729C0006FDF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED7AAF0E1D56F978008F394B /* MarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MarkerView.xib; path = ../MarkerView.xib; sourceTree = "<group>"; };
+		ED7AAF101D56FA27008F394B /* MarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarkerView.swift; path = ../MarkerView.swift; sourceTree = "<group>"; };
 		EDD682C51D45A3840028F1A8 /* AddObjectiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddObjectiveViewController.swift; sourceTree = "<group>"; };
 		EDD682C61D45A3840028F1A8 /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		EDD682C71D45A3840028F1A8 /* AddDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED1F74D41D4FEB0B00D2284E /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,9 +153,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED1F74C61D4FEADB00D2284E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED1F74CD1D4FEADB00D2284E /* Charts.framework */,
+				ED1F74CF1D4FEADB00D2284E /* Charts.framework */,
+				ED1F74D11D4FEADB00D2284E /* Charts.framework */,
+				ED1F74D31D4FEADB00D2284E /* ChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		ED7977AC1D1729BF006FDF22 = {
 			isa = PBXGroup;
 			children = (
+				ED1F74C51D4FEADB00D2284E /* Charts.xcodeproj */,
 				ED7977B71D1729BF006FDF22 /* Nonzero Day */,
 				ED7977CF1D1729C0006FDF22 /* Nonzero DayTests */,
 				ED7977DA1D1729C0006FDF22 /* Nonzero DayUITests */,
@@ -118,11 +189,14 @@
 			isa = PBXGroup;
 			children = (
 				EDD682C51D45A3840028F1A8 /* AddObjectiveViewController.swift */,
+				ED4B91861D4DC54B00546D27 /* ColorPicker.swift */,
 				EDD682C61D45A3840028F1A8 /* ColorCell.swift */,
 				EDD682C71D45A3840028F1A8 /* AddDataViewController.swift */,
 				EDD682C81D45A3840028F1A8 /* MSDate.swift */,
 				EDD682C91D45A3840028F1A8 /* SampleData.swift */,
 				EDD682CA1D45A3840028F1A8 /* SettingsViewController.swift */,
+				ED7AAF0E1D56F978008F394B /* MarkerView.xib */,
+				ED7AAF101D56FA27008F394B /* MarkerView.swift */,
 				EDD682CC1D45A3840028F1A8 /* ObjectiveViewController.swift */,
 				EDD682CD1D45A3840028F1A8 /* Objective.swift */,
 				ED7977B81D1729BF006FDF22 /* AppDelegate.swift */,
@@ -165,10 +239,12 @@
 				ED7977B11D1729BF006FDF22 /* Sources */,
 				ED7977B21D1729BF006FDF22 /* Frameworks */,
 				ED7977B31D1729BF006FDF22 /* Resources */,
+				ED1F74D81D4FEB0B00D2284E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				ED1F74D71D4FEB0B00D2284E /* PBXTargetDependency */,
 			);
 			name = "Nonzero Day";
 			productName = "Nonzero Day";
@@ -245,6 +321,12 @@
 			mainGroup = ED7977AC1D1729BF006FDF22;
 			productRefGroup = ED7977B61D1729BF006FDF22 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = ED1F74C61D4FEADB00D2284E /* Products */;
+					ProjectRef = ED1F74C51D4FEADB00D2284E /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				ED7977B41D1729BF006FDF22 /* Nonzero Day */,
@@ -254,11 +336,43 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		ED1F74CD1D4FEADB00D2284E /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = ED1F74CC1D4FEADB00D2284E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ED1F74CF1D4FEADB00D2284E /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = ED1F74CE1D4FEADB00D2284E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ED1F74D11D4FEADB00D2284E /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = ED1F74D01D4FEADB00D2284E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ED1F74D31D4FEADB00D2284E /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = ED1F74D21D4FEADB00D2284E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		ED7977B31D1729BF006FDF22 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED7AAF0F1D56F978008F394B /* MarkerView.xib in Resources */,
 				ED7977C61D1729BF006FDF22 /* LaunchScreen.storyboard in Resources */,
 				ED7977C31D1729BF006FDF22 /* Assets.xcassets in Resources */,
 				ED7977BE1D1729BF006FDF22 /* Main.storyboard in Resources */,
@@ -287,12 +401,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDD682D51D45A3840028F1A8 /* ObjectiveViewController.swift in Sources */,
+				ED4B91871D4DC54B00546D27 /* ColorPicker.swift in Sources */,
 				EDD682CE1D45A3840028F1A8 /* AddObjectiveViewController.swift in Sources */,
 				ED7977C11D1729BF006FDF22 /* Nonzero_Day.xcdatamodeld in Sources */,
 				ED7977BB1D1729BF006FDF22 /* ViewController.swift in Sources */,
 				EDD682CF1D45A3840028F1A8 /* ColorCell.swift in Sources */,
 				EDD682D01D45A3840028F1A8 /* AddDataViewController.swift in Sources */,
 				EDD682D11D45A3840028F1A8 /* MSDate.swift in Sources */,
+				ED7AAF111D56FA27008F394B /* MarkerView.swift in Sources */,
 				ED7977B91D1729BF006FDF22 /* AppDelegate.swift in Sources */,
 				EDD683161D45A8530028F1A8 /* PageContentController.swift in Sources */,
 				EDD682D61D45A3840028F1A8 /* Objective.swift in Sources */,
@@ -320,6 +436,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		ED1F74D71D4FEB0B00D2284E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Charts-iOS";
+			targetProxy = ED1F74D61D4FEB0B00D2284E /* PBXContainerItemProxy */;
+		};
 		ED7977CE1D1729C0006FDF22 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = ED7977B41D1729BF006FDF22 /* Nonzero Day */;
@@ -439,10 +560,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Nonzero Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Nonzero-Day";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -450,10 +573,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Nonzero Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Nonzero-Day";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -18,6 +18,10 @@ class MSDate : Hashable, CustomStringConvertible{
     var month: NSInteger
     var year: NSInteger
     var realDate: NSDate
+	
+	var string : String {
+		return String(month) + "/" + String(day)
+	}
     var hashValue: Int {
         return day * month + year
     }
@@ -63,6 +67,8 @@ class MSDate : Hashable, CustomStringConvertible{
     func getTomorrow() -> MSDate{
         return MSDate(withDay: day + 1, withMonth: month, withYear: year)
     }
+	
+	
 	
 	
     

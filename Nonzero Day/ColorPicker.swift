@@ -2,93 +2,143 @@
 //  ColorPicker.swift
 //  Nonzero Day
 //
-//  Created by Mark Schmidt on 7/17/16.
+//  Created by Mark Schmidt on 7/31/16.
 //  Copyright © 2016 Mark Schmidt. All rights reserved.
 //
 
 import UIKit
+extension UIColor {
+	convenience init(red: Int, green: Int, blue: Int) {
+		assert(red >= 0 && red <= 255, "Invalid red component")
+		assert(green >= 0 && green <= 255, "Invalid green component")
+		assert(blue >= 0 && blue <= 255, "Invalid blue component")
+		
+		self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+	}
+	
+	convenience init(netHex:Int) {
+		self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+	}
+	
+	func isRoughlyEqual(otherColor : UIColor) -> Bool{
+		let minVariance : CGFloat = 0.0000001
+		//calculate distance
+		func distance(a a : CGFloat, b : CGFloat) -> CGFloat {
+			return abs(pow(a, 2) - pow(b, 2))
+		}
+		
+		var sRed, sGreen, sBlue : CGFloat
+		sRed = 0.0
+		sGreen = 0.0
+		sBlue = 0.0
+		self.getRed(&sRed, green: &sGreen, blue: &sBlue, alpha: nil)
+		
+		var eRed, eGreen, eBlue : CGFloat
+		eRed = 0.0
+		eGreen = 0.0
+		eBlue = 0.0
+		otherColor.getRed(&eRed, green: &eGreen, blue: &eBlue, alpha: nil)
+		
+		return (distance(a: sRed, b: eRed) + distance(a: sGreen, b: eGreen) + distance(a: sBlue, b: eBlue))	< minVariance
+	}
+}
 
-private let reuseIdentifier = "Cell"
+class ColorPicker : NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
 
-class ColorPicker: UICollectionViewController {
+	var view : UIView
+	var selectedIndex : NSIndexPath
+	var accentObjects : [UIView]
+	var rootViewController : ViewController
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	init(withView v : UIView, withSelectedIndex i : NSIndexPath, withAccentObjects a: [UIView], withRootViewController rvc : ViewController) {
+		view = v
+		selectedIndex = i
+		accentObjects = a
+		rootViewController = rvc
+	}
+	
+	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return colors.count
+	}
+	
+	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ColorCell", forIndexPath: indexPath) as! ColorCell
+		cell.color = colors[indexPath.row]
+		if indexPath == selectedIndex {
+			cell.drawCell(true)
+		} else {
+			cell.drawCell(false)
+		}
+		return cell
+	}
+	
+	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		//deselect original cell
+		
+		let oldCell = collectionView.cellForItemAtIndexPath(selectedIndex) as! ColorCell
+		oldCell.color = colors[selectedIndex.row]
+		UIView.transitionWithView(oldCell, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
+			oldCell.drawCell(false)
+			}, completion: nil)
+		
+		
+		selectedIndex = indexPath
+		
+		
+		let newCell = collectionView.cellForItemAtIndexPath(selectedIndex) as! ColorCell
+		newCell.color = colors[selectedIndex.row]
+		UIView.transitionWithView(newCell, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
+			newCell.drawCell(true)
+			}, completion: nil)
+		
+		
+		changeColors(fromColor: oldCell.color, toColor: newCell.color)
+		
+		
+	}
+	
+	func changeColors(fromColor start : UIColor, toColor end : UIColor) {
+		
+		var sRed, sGreen, sBlue : CGFloat
+		sRed = 0.0
+		sGreen = 0.0
+		sBlue = 0.0
+		start.getRed(&sRed, green: &sGreen, blue: &sBlue, alpha: nil)
+		
+		var eRed, eGreen, eBlue : CGFloat
+		eRed = 0.0
+		eGreen = 0.0
+		eBlue = 0.0
+		end.getRed(&eRed, green: &eGreen, blue: &eBlue, alpha: nil)
+		
+		let steps = 50
+		let timeStep = 1.0/Double(steps)
+		
+		let pRedSlope = (eRed - sRed)/CGFloat(steps)
+		let pGreenSlope = (eGreen - sGreen)/CGFloat(steps)
+		let pBlueSlope = (eBlue - sBlue)/CGFloat(steps)
+		
+		
+		
+		
+		UIView.animateKeyframesWithDuration(2.0, delay: 0.0, options: [.AllowUserInteraction], animations: {
+			for i in 0...steps {
+				let time = Double(i) * timeStep
+				let newPrimaryColor = UIColor(
+					red: sRed + pRedSlope * CGFloat(i),
+					green: sGreen + pGreenSlope * CGFloat(i),
+					blue: sBlue + pBlueSlope * CGFloat(i),
+					alpha: 1)
+				
+				UIView.addKeyframeWithRelativeStartTime(time, relativeDuration: timeStep, animations: {
+					self.view.backgroundColor = newPrimaryColor
+					self.rootViewController.view.backgroundColor = newPrimaryColor
+				})
+			}
+			}, completion: nil)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
-    
-        // Configure the cell
-    
-        return cell
-    }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
-
+		for obj in accentObjects {
+			obj.tintColor = getComplementColor(end)
+		}
+	}
 }

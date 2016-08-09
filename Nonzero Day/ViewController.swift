@@ -32,19 +32,17 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 		pageViewController = storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as? UIPageViewController
 		pageViewController?.dataSource = self
 		pageViewController?.delegate = self
-		let startingViewController = viewControllerAtIndex(0)
-		let viewControllers:[UIViewController] = [startingViewController!]
-		pageViewController!.setViewControllers(viewControllers, direction: UIPageViewControllerNavigationDirection.Reverse, animated: true, completion: nil)
-		pageViewController?.view.frame = CGRectMake(0,0, self.view!.frame.size.width, self.view!.frame.size.height)
 		
+		
+		pageViewController?.view.frame = CGRectMake(0,0, self.view!.frame.size.width, self.view!.frame.size.height)
 		addChildViewController(pageViewController!)
 		view.addSubview(pageViewController!.view)
 		pageViewController?.didMoveToParentViewController(self)
-		refreshPageControl(0)
-		view.backgroundColor = (startingViewController as! PageContentController).backgroundColor
+		setupPageController(0, forward: true)
 		
 		
     }
+	
 	
 	func refreshObjectives() {
 		let fetchRequest = NSFetchRequest(entityName: "Objective")
@@ -53,9 +51,6 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 		fetchRequest.sortDescriptors = [sortDescriptor]
 		do {
 			objectives = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Objective]
-			/*for objective in objectives {
-				objective.refreshDictionary()
-			}*/
 		} catch {
 			print("cannot get objectives")
 		}
@@ -87,16 +82,18 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 		return viewControllerAtIndex(index + 1)
 	}
 	
-	func viewControllerAtIndex(index : Int) -> UIViewController? {
+	func viewControllerAtIndex(index : Int) -> PageContentController? {
 		if index < 0 || index > objectives.count {
 			return nil
 		} else if index == objectives.count {
 			let vc = storyboard?.instantiateViewControllerWithIdentifier("AddObjectiveViewController") as! AddObjectiveViewController
 			vc.rootViewController = self
+			vc.pageIndex = index
 			return vc
 		} else {
 			let vc = storyboard?.instantiateViewControllerWithIdentifier("ObjectiveViewController") as! ObjectiveViewController
 			vc.pageIndex = index
+			print("Creating objectiveViewController with objective : " + objectives[index].title)
 			vc.objective = objectives[index]
 			vc.rootViewController = self
 			
@@ -128,6 +125,35 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
 		return UIStatusBarStyle.LightContent
+	}
+	
+	func deleteObjective(objective : Objective) {
+		let index = objectives.indexOf(objective)
+		objectives.removeAtIndex(index!)
+		print("Deleting at index: " + String(index!) + " objectives.count : " + String(objectives.count))
+		managedObjectContext.deleteObject(objective)
+		setupPageController(0, forward: true)
+		
+		
+		do {
+			try managedObjectContext.save()
+		} catch {
+			print("Could not delete")
+		}
+	}
+	
+	func setupPageController(index : Int, forward : Bool) {
+		let startingViewController = viewControllerAtIndex(index)
+		let viewControllers:[UIViewController] = [startingViewController!]
+		if forward {
+			pageViewController!.setViewControllers(viewControllers, direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+		} else {
+			pageViewController!.setViewControllers(viewControllers, direction: UIPageViewControllerNavigationDirection.Reverse, animated: true, completion: nil)
+		}
+		
+		view.backgroundColor = startingViewController!.backgroundColor
+
+		refreshPageControl(index)
 	}
 
 

@@ -10,7 +10,6 @@ import UIKit
 
 class ColorCell: UICollectionViewCell {
     
-	//@IBOutlet weak var view: UIView!
 	
 	@IBOutlet weak var view: UIView!
 	var color : UIColor! 
