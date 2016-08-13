@@ -119,6 +119,25 @@ class ColorPicker : NSObject, UICollectionViewDelegate, UICollectionViewDataSour
 		let pBlueSlope = (eBlue - sBlue)/CGFloat(steps)
 		
 		
+		/*let accentStart = getComplementColor(start)
+		let accentEnd = getComplementColor(end)
+		
+		var aRed, aGreen, aBlue : CGFloat
+		aRed = 0.0
+		aGreen = 0.0
+		aBlue = 0.0
+		accentStart.getRed(&aRed, green: &aGreen, blue: &aBlue, alpha: nil)
+		
+		var bRed, bGreen, bBlue : CGFloat
+		bRed = 0.0
+		bGreen = 0.0
+		bBlue = 0.0
+		accentEnd.getRed(&bRed, green: &bGreen, blue: &bBlue, alpha: nil)
+		
+		let aRedSlope = (bRed - aRed)/CGFloat(steps)
+		let aGreenSlope = (bGreen - aGreen)/CGFloat(steps)
+		let aBlueSlope = (bBlue - aBlue)/CGFloat(steps)
+*/
 		
 		
 		UIView.animateKeyframesWithDuration(2.0, delay: 0.0, options: [.AllowUserInteraction], animations: {
@@ -130,14 +149,23 @@ class ColorPicker : NSObject, UICollectionViewDelegate, UICollectionViewDataSour
 					blue: sBlue + pBlueSlope * CGFloat(i),
 					alpha: 1)
 				
+				/*let newAccentColor = UIColor(
+					red: aRed + aRedSlope * CGFloat(i),
+					green: aGreen + aGreenSlope * CGFloat(i),
+					blue: aBlue + aBlueSlope * CGFloat(i),
+					alpha: 1)*/
+				
+				
+				
 				UIView.addKeyframeWithRelativeStartTime(time, relativeDuration: timeStep, animations: {
 					self.view.backgroundColor = newPrimaryColor
+					
+					
 					self.rootViewController.view.backgroundColor = newPrimaryColor
 				})
 			}
 			}, completion: nil)
-
-		for obj in accentObjects {
+		for obj in self.accentObjects {
 			obj.tintColor = getComplementColor(end)
 		}
 	}

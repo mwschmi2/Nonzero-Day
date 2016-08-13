@@ -8,7 +8,13 @@
 
 import UIKit
 
-class AddDataViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+class AddDataViewController : UIViewController {
+	var objective : Objective!
+	
+	
+}
+
+class AddDataViewControllerScroll: AddDataViewController, UIPickerViewDataSource, UIPickerViewDelegate{
 
     
 	@IBOutlet weak var unitLabel: UILabel!
@@ -21,11 +27,13 @@ class AddDataViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 	@IBOutlet weak var unitLabelSpacer: NSLayoutConstraint!
 	
 	var score = 1
-	var objective : Objective!
+	
     
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		print("Makes it here?")
 		
         scorePicker.dataSource = self
         scorePicker.delegate = self
@@ -40,7 +48,34 @@ class AddDataViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 		
 	}
     
-    
+    /*
+	@IBAction func directButton(sender: AnyObject) {
+		let alert = UIAlertController(title: objective.title + " Data", message: "How much did you " + objective.verb + " today?", preferredStyle: .Alert)
+		var scoreField : UITextField?
+		alert.addTextFieldWithConfigurationHandler({
+			(textField) -> Void in
+			scoreField = textField
+			let row = self.scorePicker.selectedRowInComponent(0)
+			if row == 0 {
+				scoreField?.placeholder = String(row + 1) + " " + self.objective.singularNoun
+			} else {
+				scoreField?.placeholder = String(row + 1) + " " + self.objective.pluralNoun
+			}
+			textField.keyboardType = .NumberPad
+		})
+		
+		alert.addAction(UIAlertAction(title: "Confirm", style: .Default, handler: {
+			(action) -> Void in
+			if let textField = scoreField {
+				self.scorePicker.selectRow(Int(textField.text!)! - 1, inComponent: 0, animated: true)
+				self.selectRow(Int(textField.text!)! - 1)
+			}
+		}))
+		
+		alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+		
+		self.presentViewController(alert, animated: true, completion: {})
+	}*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -56,10 +91,18 @@ class AddDataViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
 	
 	func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+		
 		return NSAttributedString(string: String(row + 1), attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
 	}
-    
+	
+	
+	
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		selectRow(row)
+
+    }
+	
+	func selectRow(row: Int) {
 		if row == 0 {
 			UIView.transitionWithView(unitLabel, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
 				self.unitLabel.text = self.objective.singularNoun
@@ -79,7 +122,8 @@ class AddDataViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 				}
 				}, completion: nil)
 		}
-    }
+	}
+	
 	
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -29,12 +29,9 @@ class ObjectiveViewController: PageContentController, ChartViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		updateLabels(true)
+		updateLabels(animated: true)
 		
-		view.backgroundColor = objective.color
-		backgroundColor = objective.color
-		addDataButton.tintColor = objective.accentColor
-		settingsButton.tintColor = objective.accentColor
+		
 		
 		/*let timer = NSTimer.scheduledTimerWithTimeInterval(30.0, target: self, selector: #selector(self.updateLabels), userInfo: nil, repeats: true)
 		NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
@@ -70,7 +67,6 @@ class ObjectiveViewController: PageContentController, ChartViewDelegate{
 		
 		
 		chartControl.selectedSegmentIndex = 0
-		chartControl.tintColor = objective.accentColor
 		refreshChart(animated: true)
 
 		
@@ -87,7 +83,7 @@ class ObjectiveViewController: PageContentController, ChartViewDelegate{
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		print("[ObjectiveViewController] ViewDidAppear: Index : " + String(pageIndex) + " Objective : " + objective.title)
-		updateLabels(false)
+		updateLabels(animated: false)
 	}
 	
 	
@@ -110,12 +106,26 @@ class ObjectiveViewController: PageContentController, ChartViewDelegate{
 	}
 	
 	@IBAction func confirmSettings(segue: UIStoryboardSegue) {
+		let settings = segue.sourceViewController as! SettingsViewController
+		objective.title = settings.titleField.text!
+		objective.pluralNoun = settings.unitsField.text!
+		objective.singularNoun = settings.unitsField.text!
+		objective.color = colors[settings.colorPickerDelegate.selectedIndex.row]
+		objective.accentColor = getComplementColor(objective.color)
 		
+		updateLabels(animated: true)
+		refreshChart(animated: true)
 		objective.save()
 	}
 	
-	func updateLabels(animated : Bool) {
+	func updateLabels(animated animated : Bool) {
 		
+		view.backgroundColor = objective.color
+		backgroundColor = objective.color
+		addDataButton.tintColor = objective.accentColor
+		settingsButton.tintColor = objective.accentColor
+		chartControl.tintColor = objective.accentColor
+
 		print("[ObjectiveViewController] Updating labels with objective : " + objective.title)
 		titleLabel.text = objective.title
 		totalLabel.text = objective.total == 1 ? "1 " + objective.singularNoun + " in total" : String(objective.total) + " " + objective.pluralNoun + " in total"

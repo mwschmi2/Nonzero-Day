@@ -37,6 +37,13 @@ class Objective : NSManagedObject{
 	
 	@NSManaged var data : Set<Data>
 	
+	enum dataEntryType {
+		case scroll
+		case numPad
+	}
+	
+	var entryType = dataEntryType.scroll
+	
 	var dataDictionary : [MSDate : Data] = [:]
 	
 	func refreshDictionary() {

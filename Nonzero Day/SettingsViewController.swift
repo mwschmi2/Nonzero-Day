@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UITextFieldDelegate{
 
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
 		return UIStatusBarStyle.LightContent
@@ -47,6 +47,7 @@ class SettingsViewController: UIViewController {
 		doneButton.tintColor = objective.accentColor
 		deleteButton.tintColor = objective.accentColor
 		
+		
 		var index = 0
 		for i in 0..<colors.count {
 			if objective.color.isRoughlyEqual(colors[i]){
@@ -61,6 +62,16 @@ class SettingsViewController: UIViewController {
 		colorPicker.dataSource = colorPickerDelegate
 		colorPicker.backgroundColor = UIColor.clearColor()
 		
+		titleField.delegate = self
+		unitsField.delegate = self
+		titleField.text = objective.title
+		unitsField.text = objective.pluralNoun
+		
+	}
+	
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		return true
 	}
 	
 	
