@@ -43,9 +43,10 @@ extension UIColor {
 	}
 }
 
-class ColorPicker : NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
+class ColorPicker : NSObject, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
 	var view : UIView
+	var controller : AddObjectiveViewController?
 	var selectedIndex : NSIndexPath
 	var accentObjects : [UIView]
 	var rootViewController : ViewController
@@ -55,14 +56,18 @@ class ColorPicker : NSObject, UICollectionViewDelegate, UICollectionViewDataSour
 		selectedIndex = i
 		accentObjects = a
 		rootViewController = rvc
+		
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return colors.count
 	}
 	
+	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+		
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ColorCell", forIndexPath: indexPath) as! ColorCell
+
 		cell.color = colors[indexPath.row]
 		if indexPath == selectedIndex {
 			cell.drawCell(true)
@@ -72,15 +77,36 @@ class ColorPicker : NSObject, UICollectionViewDelegate, UICollectionViewDataSour
 		return cell
 	}
 	
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+		let frameWidth = collectionView.frame.width
+		let cellSpacing = spacing(collectionView)
+		let cellSize = (frameWidth - 3.0 * cellSpacing)/4.0 - 1
+		//print("Framewidth: \(frameWidth) cellSpacing: \(cellSpacing) cellSize: \(cellSize)")
+		
+		return CGSize(width: cellSize, height: cellSize)
+	}
+	
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+		return spacing(collectionView)
+	}
+	
+	func spacing(collectionView : UICollectionView) -> CGFloat {
+		let frameWidth = collectionView.frame.width
+		let spacing = frameWidth/15
+		//print("Actual spacing: " + String(spacing))
+		return spacing
+	}
+	
+	
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		//deselect original cell
-		
-		let oldCell = collectionView.cellForItemAtIndexPath(selectedIndex) as! ColorCell
-		oldCell.color = colors[selectedIndex.row]
-		UIView.transitionWithView(oldCell, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
-			oldCell.drawCell(false)
-			}, completion: nil)
-		
+		let oldColor = colors[selectedIndex.row]
+		if let oldCell = collectionView.cellForItemAtIndexPath(selectedIndex) as? ColorCell {
+			
+			UIView.transitionWithView(oldCell, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
+				oldCell.drawCell(false)
+				}, completion: nil)
+		}
 		
 		selectedIndex = indexPath
 		
@@ -92,7 +118,7 @@ class ColorPicker : NSObject, UICollectionViewDelegate, UICollectionViewDataSour
 			}, completion: nil)
 		
 		
-		changeColors(fromColor: oldCell.color, toColor: newCell.color)
+		changeColors(fromColor: oldColor, toColor: newCell.color)
 		
 		
 	}
@@ -119,28 +145,8 @@ class ColorPicker : NSObject, UICollectionViewDelegate, UICollectionViewDataSour
 		let pBlueSlope = (eBlue - sBlue)/CGFloat(steps)
 		
 		
-		/*let accentStart = getComplementColor(start)
-		let accentEnd = getComplementColor(end)
 		
-		var aRed, aGreen, aBlue : CGFloat
-		aRed = 0.0
-		aGreen = 0.0
-		aBlue = 0.0
-		accentStart.getRed(&aRed, green: &aGreen, blue: &aBlue, alpha: nil)
-		
-		var bRed, bGreen, bBlue : CGFloat
-		bRed = 0.0
-		bGreen = 0.0
-		bBlue = 0.0
-		accentEnd.getRed(&bRed, green: &bGreen, blue: &bBlue, alpha: nil)
-		
-		let aRedSlope = (bRed - aRed)/CGFloat(steps)
-		let aGreenSlope = (bGreen - aGreen)/CGFloat(steps)
-		let aBlueSlope = (bBlue - aBlue)/CGFloat(steps)
-*/
-		
-		
-		UIView.animateKeyframesWithDuration(2.0, delay: 0.0, options: [.AllowUserInteraction], animations: {
+		UIView.animateKeyframesWithDuration(1.0, delay: 0.0, options: [], animations: {
 			for i in 0...steps {
 				let time = Double(i) * timeStep
 				let newPrimaryColor = UIColor(
@@ -158,10 +164,9 @@ class ColorPicker : NSObject, UICollectionViewDelegate, UICollectionViewDataSour
 				
 				
 				UIView.addKeyframeWithRelativeStartTime(time, relativeDuration: timeStep, animations: {
-					self.view.backgroundColor = newPrimaryColor
-					
-					
+					//self.view.backgroundColor = newPrimaryColor
 					self.rootViewController.view.backgroundColor = newPrimaryColor
+					self.controller?.backgroundColor = newPrimaryColor
 				})
 			}
 			}, completion: nil)
@@ -170,3 +175,4 @@ class ColorPicker : NSObject, UICollectionViewDelegate, UICollectionViewDataSour
 		}
 	}
 }
+

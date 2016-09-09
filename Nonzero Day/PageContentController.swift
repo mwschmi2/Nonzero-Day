@@ -12,4 +12,5 @@ class PageContentController : UIViewController {
 	var pageIndex : Int!
 	var rootViewController : ViewController!
 	var backgroundColor : UIColor!
+	
 }

@@ -42,37 +42,43 @@ class AddObjectiveViewController: PageContentController, UIPickerViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		
+		print("[AddObjectiveViewController] Calling view did load")
 		
 		let index = arc4random_uniform(UInt32(colors.count))
-		view.backgroundColor = colors[Int(index)]
-		backgroundColor = view.backgroundColor
-		confirmButton.tintColor = getComplementColor(view.backgroundColor!)
+		//let index = 0
+		view.backgroundColor = UIColor.clearColor()
+		
+		backgroundColor = colors[Int(index)]
+		confirmButton.tintColor = getComplementColor(backgroundColor!)
 		let selectedIndex = NSIndexPath(forRow: Int(index), inSection: 0)
 		
 		colorPickerDelegate = ColorPicker(withView: view, withSelectedIndex: selectedIndex, withAccentObjects: [confirmButton], withRootViewController: rootViewController)
+		colorPickerDelegate.controller = self
 		colorPicker.delegate = colorPickerDelegate
 		colorPicker.dataSource = colorPickerDelegate
 		colorPicker.backgroundColor = UIColor.clearColor()
+	
 		
-
+		view.bringSubviewToFront(confirmButton)
 		
 		
 		typePicker.dataSource = self
 		typePicker.delegate = self
 		typePicker.tag = 0
+		typePicker.selectRow(types.count/2, inComponent: 0, animated: false)
 		
 		
 		nounPicker.delegate = self
 		nounPicker.dataSource = self
 		nounPicker.tag = 1
+		nounPicker.selectRow(types[types.count/2].units.count/2, inComponent: 0, animated: false)
 
     }
 	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
-		backgroundColor = colors[colorPickerDelegate.selectedIndex.row]
-		view.backgroundColor = colors[colorPickerDelegate.selectedIndex.row]
+		//backgroundColor = colors[colorPickerDelegate.selectedIndex.row]
+		rootViewController.view.backgroundColor = colors[colorPickerDelegate.selectedIndex.row]
 	}
 	
 
@@ -116,6 +122,7 @@ class AddObjectiveViewController: PageContentController, UIPickerViewDataSource,
 				self.nounPicker.reloadComponent(0)
 				}, completion: nil)
 		}
+		
 	}
 
 	

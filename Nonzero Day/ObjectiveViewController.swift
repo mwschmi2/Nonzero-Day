@@ -26,6 +26,8 @@ class ObjectiveViewController: PageContentController, ChartViewDelegate{
 	
 	var objective : Objective!
 	
+	
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -82,7 +84,6 @@ class ObjectiveViewController: PageContentController, ChartViewDelegate{
 	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
-		print("[ObjectiveViewController] ViewDidAppear: Index : " + String(pageIndex) + " Objective : " + objective.title)
 		updateLabels(animated: false)
 	}
 	
@@ -95,6 +96,7 @@ class ObjectiveViewController: PageContentController, ChartViewDelegate{
 			let vc = segue.destinationViewController as! SettingsViewController
 			vc.objective = objective
 			vc.rootViewController = rootViewController
+
 		}
 	}
 	
@@ -108,11 +110,20 @@ class ObjectiveViewController: PageContentController, ChartViewDelegate{
 	@IBAction func confirmSettings(segue: UIStoryboardSegue) {
 		let settings = segue.sourceViewController as! SettingsViewController
 		objective.title = settings.titleField.text!
-		objective.pluralNoun = settings.unitsField.text!
-		objective.singularNoun = settings.unitsField.text!
+		objective.pluralNoun = settings.pluralField.text!
+		objective.singularNoun = settings.singularField.text!
+		objective.verb = settings.verbField.text!
 		objective.color = colors[settings.colorPickerDelegate.selectedIndex.row]
 		objective.accentColor = getComplementColor(objective.color)
-		
+		switch settings.styleControl.selectedSegmentIndex {
+		case 0:
+			objective.scrolling = true
+			objective.entryStyle = .scroll
+		default:
+			objective.scrolling = false
+			objective.entryStyle = .numpad
+			
+		}
 		updateLabels(animated: true)
 		refreshChart(animated: true)
 		objective.save()
@@ -120,7 +131,8 @@ class ObjectiveViewController: PageContentController, ChartViewDelegate{
 	
 	func updateLabels(animated animated : Bool) {
 		
-		view.backgroundColor = objective.color
+		//view.backgroundColor = objective.color
+		view.backgroundColor = UIColor.clearColor()
 		backgroundColor = objective.color
 		addDataButton.tintColor = objective.accentColor
 		settingsButton.tintColor = objective.accentColor

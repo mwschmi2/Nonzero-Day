@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate{
+class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate{
 
 	
 	
@@ -19,6 +19,11 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 	
 	var managedObjectContext : NSManagedObjectContext!
 	var objectives : [Objective] = []
+	
+	var currentColor : UIColor!
+	var nextColor : UIColor!
+	var sRed, sGreen, sBlue : CGFloat!
+	var eRed, eGreen, eBlue : CGFloat!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +45,12 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 		pageViewController?.didMoveToParentViewController(self)
 		setupPageController(0, forward: true)
 		
-		
+		for view in (pageViewController?.view.subviews)! {
+			if let scrollView = view as? UIScrollView {
+				scrollView.delegate = self;
+				break;
+			}
+		}
     }
 	
 	
@@ -89,14 +99,15 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 			let vc = storyboard?.instantiateViewControllerWithIdentifier("AddObjectiveViewController") as! AddObjectiveViewController
 			vc.rootViewController = self
 			vc.pageIndex = index
+			//currentColor = colors[0]
 			return vc
 		} else {
 			let vc = storyboard?.instantiateViewControllerWithIdentifier("ObjectiveViewController") as! ObjectiveViewController
 			vc.pageIndex = index
-			print("Creating objectiveViewController with objective : " + objectives[index].title)
+			//print("Creating objectiveViewController with objective : " + objectives[index].title)
 			vc.objective = objectives[index]
 			vc.rootViewController = self
-			
+			//currentColor = vc.objective.color
 			return vc
 			
 		}
@@ -112,7 +123,8 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 		let vc = pageViewController.viewControllers!.last as! PageContentController
 		self.refreshPageControl(vc.pageIndex)
 		view.backgroundColor = vc.backgroundColor
-		
+		currentColor = vc.backgroundColor
+		nextColor = nil
 		
 	}
 	func refreshPageControl(index : Int) {
@@ -144,6 +156,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 	
 	func setupPageController(index : Int, forward : Bool) {
 		let startingViewController = viewControllerAtIndex(index)
+		
 		let viewControllers:[UIViewController] = [startingViewController!]
 		if forward {
 			pageViewController!.setViewControllers(viewControllers, direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
@@ -152,8 +165,54 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
 		}
 		
 		view.backgroundColor = startingViewController!.backgroundColor
-
+		currentColor = startingViewController?.backgroundColor
 		refreshPageControl(index)
+	}
+	
+	func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+		print("starting setting colors")
+		
+		currentColor = view.backgroundColor
+		nextColor = (pendingViewControllers[0] as! PageContentController).backgroundColor
+		var tempRed, tempBlue, tempGreen : CGFloat
+		tempRed = 0.0
+		tempGreen = 0.0
+		tempBlue = 0.0
+		currentColor.getRed(&tempRed, green: &tempGreen, blue: &tempBlue, alpha: nil)
+		
+		sRed = tempRed
+		sGreen = tempGreen
+		sBlue = tempBlue
+		
+		nextColor.getRed(&tempRed, green: &tempGreen, blue: &tempBlue, alpha: nil)
+		
+		eRed = tempRed
+		eGreen = tempGreen
+		eBlue = tempBlue
+		print("set colors")
+	}
+	
+	
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		let percent = (scrollView.contentOffset.x - scrollView.contentSize.width/3)/(scrollView.contentSize.width/3)
+		//print("Scrolled, position is: \(scrollView.contentOffset.x), percent is: \(percent)")
+		
+		
+		if nextColor != nil {
+			let newRed = (eRed - sRed)*abs(percent) + sRed
+			let newGreen = (eGreen - sGreen) * abs(percent) + sGreen
+			let newBlue = (eBlue - sBlue) * abs(percent) + sBlue
+		
+			let newColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+			view.backgroundColor = newColor
+		}
+		
+		
+		
+		
+
+		
+		
 	}
 
 

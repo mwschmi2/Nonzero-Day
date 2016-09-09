@@ -15,11 +15,17 @@ class ColorCell: UICollectionViewCell {
 	var color : UIColor! 
 	
 	func drawCell(selected : Bool)  {
+		
 		view.backgroundColor = UIColor.clearColor()
 		//draw circle
-		let center = view.center
+		if layer.sublayers?.count > 1 {
+			layer.sublayers?.removeLast()
+		}
+		
+		let center = CGPoint(x: frame.size.width/2, y: frame.size.width/2)
 		let strokeWidth = CGFloat(2)
-		let radius = view.frame.size.width/2 - strokeWidth
+		let radius = frame.size.width/2 - strokeWidth
+		//print("Drawing circle with cellSize: " + String(view.frame.width))
 		
 		let circlePath = UIBezierPath(arcCenter: center,
 		                              radius: radius,
@@ -35,7 +41,6 @@ class ColorCell: UICollectionViewCell {
 			shapeLayer.strokeColor = UIColor.blackColor().CGColor
 		}
 		shapeLayer.lineWidth = strokeWidth
-		
 		layer.addSublayer(shapeLayer)
 	}
 	

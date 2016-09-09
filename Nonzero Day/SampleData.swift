@@ -79,8 +79,13 @@ let writing = Type(withTitle: "Writing", withVerb: "write", withUnits: writingNo
 let programmingNouns = [Noun(s: "line of code", p: "lines of code"), Noun(s: "minute", p: "minutes")]
 let programming = Type(withTitle: "Programming", withVerb: "program", withUnits: programmingNouns)
 
+let musicNouns = [Noun(s: "minute", p: "minutes")]
+let music = Type(withTitle: "Music", withVerb: "practice", withUnits: musicNouns)
 
-let types : [Type] = [reading, writing, programming]
+let runningNouns = [Noun(s: "block", p: "blocks"), Noun(s: "mile", p: "miles"), Noun(s: "minute", p: "minutes")]
+let running = Type(withTitle: "Running", withVerb: "run", withUnits: runningNouns)
+
+let types : [Type] = [reading, writing, programming, music, running]
 
 /*var objectiveData = [
 	Objective(withType: reading, withUnits: reading.units[0], withColor: colors[0]),

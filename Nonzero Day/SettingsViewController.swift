@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UITextFieldDelegate{
+class SettingsViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate{
 
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
 		return UIStatusBarStyle.LightContent
@@ -30,11 +30,22 @@ class SettingsViewController: UIViewController, UITextFieldDelegate{
 	
 	var objective : Objective!
 	
-	@IBOutlet weak var doneButton: UIButton!
+	
+	/*@IBOutlet weak var doneButton: UIButton!
 	@IBOutlet weak var titleField: UITextField!
 	@IBOutlet weak var unitsField: UITextField!
 	@IBOutlet weak var colorPicker: UICollectionView!
 	@IBOutlet weak var deleteButton: UIButton!
+*/
+	
+	@IBOutlet weak var doneButton: UIButton!
+	@IBOutlet weak var colorPicker: UICollectionView!
+	@IBOutlet weak var titleField: UITextField!
+	@IBOutlet weak var singularField: UITextField!
+	@IBOutlet weak var pluralField: UITextField!
+	@IBOutlet weak var verbField: UITextField!
+	@IBOutlet weak var deleteButton: UIButton!
+	@IBOutlet weak var styleControl: UISegmentedControl!
 	
 	var colorPickerDelegate : ColorPicker!
 	
@@ -43,10 +54,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate{
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		view.backgroundColor = objective.color
+		view.backgroundColor = UIColor.clearColor()//objective.color
 		doneButton.tintColor = objective.accentColor
 		deleteButton.tintColor = objective.accentColor
-		
+		styleControl.tintColor = objective.accentColor
 		
 		var index = 0
 		for i in 0..<colors.count {
@@ -57,22 +68,33 @@ class SettingsViewController: UIViewController, UITextFieldDelegate{
 	
 		let selectedIndex = NSIndexPath(forRow: index, inSection: 0)
 		
-		colorPickerDelegate = ColorPicker(withView: view, withSelectedIndex: selectedIndex, withAccentObjects: [doneButton, deleteButton], withRootViewController : rootViewController)
+		colorPickerDelegate = ColorPicker(withView: view, withSelectedIndex: selectedIndex, withAccentObjects: [doneButton, deleteButton, styleControl], withRootViewController : rootViewController)
 		colorPicker.delegate = colorPickerDelegate
 		colorPicker.dataSource = colorPickerDelegate
 		colorPicker.backgroundColor = UIColor.clearColor()
 		
+		
+		
 		titleField.delegate = self
-		unitsField.delegate = self
+		singularField.delegate = self
+		pluralField.delegate = self
+		verbField.delegate = self
+		
 		titleField.text = objective.title
-		unitsField.text = objective.pluralNoun
+		singularField.text = objective.singularNoun
+		pluralField.text = objective.pluralNoun
+		verbField.text = objective.verb
+		
 		
 	}
 	
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
+		colorPicker.reloadData()
 		return true
 	}
+	
+	
 	
 	
 }

@@ -32,18 +32,18 @@ class Objective : NSManagedObject{
 	@NSManaged var verb : String
 	
 	@NSManaged var index : NSNumber
-	
 	@NSManaged var total : NSNumber
-	
 	@NSManaged var data : Set<Data>
 	
-	enum dataEntryType {
-		case scroll
-		case numPad
+	@objc enum dataEntryType : Int16 {
+		case scroll = 0
+		case numpad = 1
 	}
 	
-	var entryType = dataEntryType.scroll
+	@NSManaged var scrolling : Bool
 	
+
+	var entryStyle : dataEntryType = .scroll
 	var dataDictionary : [MSDate : Data] = [:]
 	
 	func refreshDictionary() {
@@ -67,7 +67,8 @@ class Objective : NSManagedObject{
 		newObjective.accentColor = getComplementColor(c)
 		newObjective.index = i
 		newObjective.total = 0
-		
+		newObjective.scrolling = true
+		newObjective.entryStyle = .scroll
 		newObjective.save()
 		
 		return newObjective

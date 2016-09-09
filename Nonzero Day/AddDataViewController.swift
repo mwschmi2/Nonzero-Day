@@ -9,9 +9,29 @@
 import UIKit
 
 class AddDataViewController : UIViewController {
-	var objective : Objective!
+	var objective : Objective! 
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		var vc : AddDataViewController
+		switch objective.entryStyle {
+		
+		case .scroll:
+			vc = storyboard!.instantiateViewControllerWithIdentifier("AddDataViewControllerScroll") as! AddDataViewControllerScroll
+			
+		case .numpad:
+			vc = storyboard!.instantiateViewControllerWithIdentifier("AddDataViewControllerNumpad") as! AddDataViewControllerNumpad
+		}
+		
+		vc.objective = objective
+		addChildViewController(vc)
+		view.addSubview(vc.view)
+		vc.didMoveToParentViewController(self)
+	}
 	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return UIStatusBarStyle.LightContent
+	}
 }
 
 class AddDataViewControllerScroll: AddDataViewController, UIPickerViewDataSource, UIPickerViewDelegate{
@@ -31,7 +51,7 @@ class AddDataViewControllerScroll: AddDataViewController, UIPickerViewDataSource
     
 	
     override func viewDidLoad() {
-        super.viewDidLoad()
+        //super.viewDidLoad()
 		
 		print("Makes it here?")
 		
@@ -127,14 +147,62 @@ class AddDataViewControllerScroll: AddDataViewController, UIPickerViewDataSource
 	
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if(segue.identifier == "confirmDataEntry"){
+		if segue.identifier == "confirmDataEntry" {
 			print("[AddDataViewController] Objective : " + objective.title)
 			objective.addTodayData(withContext: objective.managedObjectContext!, withScore: scorePicker.selectedRowInComponent(0) + 1)
 		}
 	}
 	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return UIStatusBarStyle.LightContent
-	}
+	
 
 }
+
+class AddDataViewControllerNumpad : AddDataViewController {
+	
+	@IBOutlet weak var questionLabel: UILabel!
+	@IBOutlet weak var confirmButton: UIButton!
+	@IBOutlet weak var cancelButton: UIButton!
+
+	@IBOutlet weak var textField: UITextField!
+	
+	@IBOutlet weak var unitLabel: UILabel!
+	@IBOutlet weak var cancelConstraint: NSLayoutConstraint!
+	@IBOutlet weak var confirmConstraint: NSLayoutConstraint!
+	override func viewDidLoad() {
+		
+
+		view.backgroundColor = objective.color
+		confirmButton.tintColor = objective.accentColor
+		cancelButton.tintColor = objective.accentColor
+		questionLabel.text = "How much did you " + objective.verb + " today?"
+		unitLabel.text = objective.pluralNoun
+		setUpObserver()
+		textField.becomeFirstResponder()
+		
+		
+	}
+	
+	private func setUpObserver() {
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+	}
+	
+	@objc private func keyboardWillShow(notification:NSNotification) {
+		
+		let userInfo:NSDictionary = notification.userInfo!
+		let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+		let keyboardRectangle = keyboardFrame.CGRectValue()
+		let keyboardHeight = keyboardRectangle.height
+		cancelConstraint.constant = keyboardHeight + 20
+		confirmConstraint.constant = keyboardHeight + 20
+	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		textField.resignFirstResponder()
+		if segue.identifier == "confirmDataEntry" {
+			objective.addTodayData(withContext: objective.managedObjectContext!, withScore: Int(textField.text!)!)
+		}
+	}
+	
+}
+
+
